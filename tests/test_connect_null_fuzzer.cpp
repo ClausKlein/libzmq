@@ -106,7 +106,7 @@ void test_connect_null_fuzzer ()
     free (len);
 }
 
-int main (int argc, char **argv)
+int main (int, char **)
 {
     setup_test_environment ();
 

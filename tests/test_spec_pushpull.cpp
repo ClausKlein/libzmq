@@ -151,7 +151,7 @@ void test_pull_fair_queue_in (const char *bind_address_)
 
 // PUSH: SHALL block on sending, or return a suitable error, when it has no
 // available peers.
-void test_push_block_on_send_no_peers (const char *bind_address_)
+void test_push_block_on_send_no_peers (const char * /* bind_address_ */)
 {
     void *sc = test_context_socket (ZMQ_PUSH);
 

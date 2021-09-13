@@ -322,7 +322,8 @@ void call_poller_wait_all_null_event_fails_event_count_nonzero (void *poller_)
                                zmq_poller_wait_all (poller_, NULL, 1, 0));
 }
 
-void call_poller_wait_all_null_event_fails_event_count_zero (void *poller_)
+void call_poller_wait_all_null_event_fails_event_count_zero (
+  void * /* poller_ */)
 {
 #if 0
     //  TODO this causes an assertion, which is not consistent if the number

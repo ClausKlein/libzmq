@@ -377,8 +377,8 @@ void test_rm_with_callback_multiple_reverse_order ()
     add_entries_rm_pipes_unique (names);
 }
 
-void check_count (zmq::generic_mtrie_t<int>::prefix_t data_,
-                  size_t len_,
+void check_count (zmq::generic_mtrie_t<int>::prefix_t /* data_ */,
+                  size_t /* len_ */,
                   int *count_)
 {
     --(*count_);

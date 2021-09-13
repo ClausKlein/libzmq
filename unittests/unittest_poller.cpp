@@ -57,8 +57,7 @@ void test_start_empty ()
 struct test_events_t : zmq::i_poll_events
 {
     test_events_t (zmq::fd_t fd_, zmq::poller_t &poller_) :
-        _fd (fd_),
-        _poller (poller_)
+        _fd (fd_), _poller (poller_)
     {
         (void) _fd;
     }

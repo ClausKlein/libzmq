@@ -8,7 +8,8 @@ set(unittests
     unittest_ip_resolver
     unittest_udp_address
     unittest_radix_tree
-    unittest_curve_encoding)
+    unittest_curve_encoding
+)
 
 # if(ENABLE_DRAFTS) list(APPEND tests ) endif(ENABLE_DRAFTS)
 
@@ -47,7 +48,8 @@ foreach(test ${unittests})
     add_test(
       NAME ${test}
       WORKING_DIRECTORY ${LIBRARY_OUTPUT_PATH}
-      COMMAND ${test})
+      COMMAND ${test}
+    )
   else()
     add_test(NAME ${test} COMMAND ${test})
   endif()

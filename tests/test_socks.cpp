@@ -102,7 +102,7 @@ int remote_connect (int socket, uint32_t addr, uint16_t port)
 }
 
 void *setup_socks_server (char *socks_server_address,
-                          int socks_server_address_len)
+                          int /* socks_server_address_len */)
 {
     fprintf (stderr, "socks_server: setup socks server\n");
     int server_fd =

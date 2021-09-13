@@ -47,41 +47,41 @@ extern "C" {
 
 struct sha1_ctxt
 {
-	union
-	{
-		uint8_t	b8[20];
-		uint32_t b32[5];
-	} h;
-	union
-	{
-		uint8_t b8[8];
-		uint64_t b64[1];
-	} c;
-	union
-	{
-		uint8_t b8[64];
-		uint32_t b32[16];
-	} m;
-	uint8_t count;
+    union
+    {
+        uint8_t b8[20];
+        uint32_t b32[5];
+    } h;
+    union
+    {
+        uint8_t b8[8];
+        uint64_t b64[1];
+    } c;
+    union
+    {
+        uint8_t b8[64];
+        uint32_t b32[16];
+    } m;
+    uint8_t count;
 };
 
-void sha1_init(struct sha1_ctxt *);
-void sha1_pad(struct sha1_ctxt *);
-void sha1_loop(struct sha1_ctxt *, const uint8_t *, size_t);
-void sha1_result(struct sha1_ctxt *, uint8_t *);
+void sha1_init (struct sha1_ctxt *);
+void sha1_pad (struct sha1_ctxt *);
+void sha1_loop (struct sha1_ctxt *, const uint8_t *, size_t);
+void sha1_result (struct sha1_ctxt *, uint8_t *);
 
 //  Compatibility with OpenSSL API
 #define SHA_DIGEST_LENGTH 20
 typedef struct sha1_ctxt SHA_CTX;
 
-#define SHA1_Init(x)            sha1_init((x))
-#define SHA1_Update(x, y, z)    sha1_loop((x), (y), (z))
-#define SHA1_Final(x, y)        sha1_result((y), (x))
+#define SHA1_Init(x) sha1_init ((x))
+#define SHA1_Update(x, y, z) sha1_loop ((x), (y), (z))
+#define SHA1_Final(x, y) sha1_result ((y), (x))
 
-#define SHA1_RESULTLEN	(160/8)
+#define SHA1_RESULTLEN (160 / 8)
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif   /* _NETINET6_SHA1_H_ */
+#endif /* _NETINET6_SHA1_H_ */

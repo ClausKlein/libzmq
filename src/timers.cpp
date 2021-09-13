@@ -144,7 +144,7 @@ long zmq::timers_t::timeout ()
     for (; it != end; ++it) {
         if (0 == _cancelled_timers.erase (it->second.timer_id)) {
             //  Live timer, lets return the timeout
-            res = std::max (static_cast<long> (it->first - now), 0l);
+            res = std::max (static_cast<long> (it->first - now), 0L);
             break;
         }
     }

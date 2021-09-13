@@ -74,10 +74,20 @@ set(tests
     test_reconnect_ivl
     test_reconnect_options
     test_tcp_accept_filter
-    test_mock_pub_sub)
+    test_mock_pub_sub
+)
 
 if(NOT WIN32)
-  list(APPEND tests test_security_gssapi test_socks test_connect_null_fuzzer test_bind_null_fuzzer test_connect_fuzzer test_bind_fuzzer)
+  list(
+    APPEND
+    tests
+    test_security_gssapi
+    test_socks
+    test_connect_null_fuzzer
+    test_bind_null_fuzzer
+    test_connect_fuzzer
+    test_bind_fuzzer
+  )
 endif()
 
 if(ZMQ_HAVE_CURVE)
@@ -115,7 +125,8 @@ if(NOT WIN32)
     test_stream_exceeds_buffer
     test_router_mandatory_hwm
     test_use_fd
-    test_zmq_poll_fd)
+    test_zmq_poll_fd
+  )
   if(HAVE_FORK)
     list(APPEND tests test_fork)
   endif()
@@ -133,7 +144,8 @@ if(NOT WIN32)
         test_sub_forward_tipc
         test_connect_delay_tipc
         test_shutdown_stress_tipc
-        test_term_endpoint_tipc)
+        test_term_endpoint_tipc
+      )
     endif()
   endif()
 endif()
@@ -184,9 +196,9 @@ if(WIN32)
 endif()
 
 add_library(
-  unity STATIC
-  "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity.c" "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity.h"
-  "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity_internals.h")
+  unity STATIC "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity.c" "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity.h"
+               "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity_internals.h"
+)
 set_target_properties(unity PROPERTIES PUBLIC_HEADER "${CMAKE_CURRENT_LIST_DIR}/../external/unity/unity.h")
 target_compile_definitions(unity PUBLIC "UNITY_USE_COMMAND_LINE_ARGS" "UNITY_EXCLUDE_FLOAT")
 target_include_directories(unity PUBLIC "${CMAKE_CURRENT_LIST_DIR}/../external/unity")
@@ -199,7 +211,8 @@ set(TESTUTIL_SOURCES
     testutil_security.cpp
     testutil_security.hpp
     testutil_unity.cpp
-    testutil_unity.hpp)
+    testutil_unity.hpp
+)
 if(BUILD_STATIC)
   add_library(testutil-static STATIC ${TESTUTIL_SOURCES})
   target_link_libraries(testutil-static libzmq-static ${OPTIONAL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} unity)
@@ -270,7 +283,8 @@ foreach(test ${tests})
     add_test(
       NAME ${test}
       WORKING_DIRECTORY ${LIBRARY_OUTPUT_PATH}
-      COMMAND ${test})
+      COMMAND ${test}
+    )
   else()
     if(${test} MATCHES "_cap_net_admin")
       add_test(NAME ${test} COMMAND sh -c "sudo ${CAPSH_PROGRAM} --caps=cap_net_admin+eip -- -c $<TARGET_FILE:${test}>")

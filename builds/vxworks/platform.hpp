@@ -301,6 +301,6 @@
 /* ---- Special case for z/OS Unix Services: openedition ---- */
 #include <vxWorks.h>
 
-#ifndef   NI_MAXHOST
-#define   NI_MAXHOST 1025
+#ifndef NI_MAXHOST
+#define NI_MAXHOST 1025
 #endif

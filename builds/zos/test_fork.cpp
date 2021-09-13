@@ -28,12 +28,12 @@
 */
 
 #include "testutil.hpp"
-#include <unistd.h>           // For alarm()
+#include <unistd.h> // For alarm()
 
 const char *address = "tcp://127.0.0.1:6571";
 
 #define NUM_MESSAGES 5
-#define TIMEOUT_SECS 5        // Global timeout
+#define TIMEOUT_SECS 5 // Global timeout
 
 int main (void)
 {
@@ -68,14 +68,13 @@ int main (void)
         zmq_close (push);
         zmq_ctx_destroy (child_ctx);
         exit (0);
-    }
-    else {
+    } else {
         //  Parent process
-        alarm(TIMEOUT_SECS);   // Set upper limit on runtime
+        alarm (TIMEOUT_SECS); // Set upper limit on runtime
 
         int count;
         for (count = 0; count < NUM_MESSAGES; count++) {
-            char buffer [5];
+            char buffer[5];
             int num_bytes = zmq_recv (pull, buffer, 5, 0);
             assert (num_bytes == 5);
         }

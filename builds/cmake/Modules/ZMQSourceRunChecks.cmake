@@ -1,5 +1,3 @@
-
-
 macro(zmq_check_sock_cloexec)
   message(STATUS "Checking whether SOCK_CLOEXEC is supported")
   check_c_source_runs(
@@ -13,7 +11,8 @@ int main(int argc, char *argv [])
     return(s == -1);
 }
 "
-    ZMQ_HAVE_SOCK_CLOEXEC)
+    ZMQ_HAVE_SOCK_CLOEXEC
+  )
 endmacro()
 
 macro(zmq_check_efd_cloexec)
@@ -28,7 +27,8 @@ int main(int argc, char *argv [])
     return(s == -1);
 }
 "
-    ZMQ_HAVE_EVENTFD_CLOEXEC)
+    ZMQ_HAVE_EVENTFD_CLOEXEC
+  )
 endmacro()
 
 macro(zmq_check_o_cloexec)
@@ -45,13 +45,14 @@ int main(int argc, char *argv [])
     return s == -1;
 }
 "
-    ZMQ_HAVE_O_CLOEXEC)
+    ZMQ_HAVE_O_CLOEXEC
+  )
 endmacro()
 
 macro(zmq_check_so_bindtodevice)
   message(STATUS "Checking whether SO_BINDTODEVICE is supported")
   check_c_source_runs(
-"
+    "
 #include <sys/socket.h>
 
 int main(int argc, char *argv [])
@@ -64,7 +65,8 @@ int main(int argc, char *argv [])
 #endif
 }
 "
-    ZMQ_HAVE_SO_BINDTODEVICE)
+    ZMQ_HAVE_SO_BINDTODEVICE
+  )
 endmacro()
 
 # TCP keep-alives Checks.
@@ -72,7 +74,7 @@ endmacro()
 macro(zmq_check_so_keepalive)
   message(STATUS "Checking whether SO_KEEPALIVE is supported")
   check_c_source_runs(
-"
+    "
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -85,7 +87,8 @@ int main(int argc, char *argv [])
     );
 }
 "
-    ZMQ_HAVE_SO_KEEPALIVE)
+    ZMQ_HAVE_SO_KEEPALIVE
+  )
 endmacro()
 
 macro(zmq_check_tcp_keepcnt)
@@ -107,7 +110,8 @@ int main(int argc, char *argv [])
     );
 }
 "
-    ZMQ_HAVE_TCP_KEEPCNT)
+    ZMQ_HAVE_TCP_KEEPCNT
+  )
 endmacro()
 
 macro(zmq_check_tcp_keepidle)
@@ -129,9 +133,9 @@ int main(int argc, char *argv [])
     );
 }
 "
-    ZMQ_HAVE_TCP_KEEPIDLE)
+    ZMQ_HAVE_TCP_KEEPIDLE
+  )
 endmacro()
-
 
 macro(zmq_check_tcp_keepintvl)
   message(STATUS "Checking whether TCP_KEEPINTVL is supported")
@@ -153,9 +157,9 @@ int main(int argc, char *argv [])
 }
 
 "
-    ZMQ_HAVE_TCP_KEEPINTVL)
+    ZMQ_HAVE_TCP_KEEPINTVL
+  )
 endmacro()
-
 
 macro(zmq_check_tcp_keepalive)
   message(STATUS "Checking whether TCP_KEEPALIVE is supported")
@@ -176,9 +180,9 @@ int main(int argc, char *argv [])
     );
 }
 "
-    ZMQ_HAVE_TCP_KEEPALIVE)
+    ZMQ_HAVE_TCP_KEEPALIVE
+  )
 endmacro()
-
 
 macro(zmq_check_tcp_tipc)
   message(STATUS "Checking whether TIPC is supported")
@@ -203,9 +207,9 @@ int main(int argc, char *argv [])
     fcntl(sd, F_SETFL, O_NONBLOCK);
 }
 "
-    ZMQ_HAVE_TIPC)
+    ZMQ_HAVE_TIPC
+  )
 endmacro()
-
 
 macro(zmq_check_pthread_setname)
   message(STATUS "Checking pthread_setname signature")
@@ -221,7 +225,8 @@ int main(int argc, char *argv [])
     return 0;
 }
 "
-    ZMQ_HAVE_PTHREAD_SETNAME_1)
+    ZMQ_HAVE_PTHREAD_SETNAME_1
+  )
   check_c_source_runs(
     "
 #include <pthread.h>
@@ -232,7 +237,8 @@ int main(int argc, char *argv [])
     return 0;
 }
 "
-    ZMQ_HAVE_PTHREAD_SETNAME_2)
+    ZMQ_HAVE_PTHREAD_SETNAME_2
+  )
   check_c_source_runs(
     "
 #include <pthread.h>
@@ -243,7 +249,8 @@ int main(int argc, char *argv [])
     return 0;
 }
 "
-    ZMQ_HAVE_PTHREAD_SETNAME_3)
+    ZMQ_HAVE_PTHREAD_SETNAME_3
+  )
   check_c_source_runs(
     "
 #include <pthread.h>
@@ -254,7 +261,8 @@ int main(int argc, char *argv [])
     return 0;
 }
 "
-    ZMQ_HAVE_PTHREAD_SET_NAME)
+    ZMQ_HAVE_PTHREAD_SET_NAME
+  )
   set(CMAKE_REQUIRED_FLAGS ${SAVE_CMAKE_REQUIRED_FLAGS})
 endmacro()
 
@@ -268,15 +276,15 @@ macro(zmq_check_pthread_setaffinity)
 
 int main(int argc, char *argv [])
 {
-    cpu_set_t test; 
+    cpu_set_t test;
     pthread_setaffinity_np (pthread_self(), sizeof(cpu_set_t), &test);
     return 0;
 }
 "
-    ZMQ_HAVE_PTHREAD_SET_AFFINITY)
+    ZMQ_HAVE_PTHREAD_SET_AFFINITY
+  )
   set(CMAKE_REQUIRED_FLAGS ${SAVE_CMAKE_REQUIRED_FLAGS})
 endmacro()
-
 
 macro(zmq_check_getrandom)
   message(STATUS "Checking whether getrandom is supported")
@@ -291,14 +299,15 @@ int main (int argc, char *argv [])
     return rc == -1 ? 1 : 0;
 }
 "
-    ZMQ_HAVE_GETRANDOM)
+    ZMQ_HAVE_GETRANDOM
+  )
 endmacro()
 
 macro(zmq_check_noexcept)
   message(STATUS "Checking whether noexcept is supported")
   check_cxx_source_compiles(
-"
-struct X 
+    "
+struct X
 {
     X(int i) noexcept {}
 };
@@ -309,7 +318,8 @@ int main(int argc, char *argv [])
     return 0;
 }
 "
-    ZMQ_HAVE_NOEXCEPT)
+    ZMQ_HAVE_NOEXCEPT
+  )
 endmacro()
 
 macro(zmq_check_so_priority)
@@ -328,5 +338,6 @@ int main (int argc, char *argv [])
     );
 }
 "
-    ZMQ_HAVE_SO_PRIORITY)
+    ZMQ_HAVE_SO_PRIORITY
+  )
 endmacro()

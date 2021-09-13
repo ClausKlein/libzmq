@@ -138,7 +138,7 @@ void test_bind_curve_fuzzer ()
     free (len);
 }
 
-int main (int argc, char **argv)
+int main (int, char **)
 {
     setup_test_environment ();
 

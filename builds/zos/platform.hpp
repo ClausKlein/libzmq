@@ -295,6 +295,6 @@
 
 /* ---- Special case for z/OS Unix Services: openedition ---- */
 #include <pthread.h>
-#ifndef   NI_MAXHOST
-#define   NI_MAXHOST 1025
+#ifndef NI_MAXHOST
+#define NI_MAXHOST 1025
 #endif

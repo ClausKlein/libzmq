@@ -3,39 +3,39 @@
 #  Please refer to the README for information about making permanent changes.  #
 ################################################################################
 
-if (NOT MSVC)
-find_package(PkgConfig REQUIRED) 
-pkg_check_modules(PC_SODIUM "libsodium")
-if (PC_SODIUM_FOUND)
-  set(pkg_config_names_private "${pkg_config_names_private} libsodium")
-endif()
-if (NOT PC_SODIUM_FOUND)
+if(NOT MSVC)
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(PC_SODIUM "libsodium")
+  if(PC_SODIUM_FOUND)
+    set(pkg_config_names_private "${pkg_config_names_private} libsodium")
+  endif()
+  if(NOT PC_SODIUM_FOUND)
     pkg_check_modules(PC_SODIUM "sodium")
-    if (PC_SODIUM_FOUND)
+    if(PC_SODIUM_FOUND)
       set(pkg_config_names_private "${pkg_config_names_private} sodium")
     endif()
-endif (NOT PC_SODIUM_FOUND)
-if (PC_SODIUM_FOUND)
-  set(SODIUM_INCLUDE_HINTS ${PC_SODIUM_INCLUDE_DIRS} ${PC_SODIUM_INCLUDE_DIRS}/*)
-  set(SODIUM_LIBRARY_HINTS ${PC_SODIUM_LIBRARY_DIRS} ${PC_SODIUM_LIBRARY_DIRS}/*)
-else()
-  set(pkg_config_libs_private "${pkg_config_libs_private} -lsodium")
-endif()
-endif (NOT MSVC)
+  endif(NOT PC_SODIUM_FOUND)
+  if(PC_SODIUM_FOUND)
+    set(SODIUM_INCLUDE_HINTS ${PC_SODIUM_INCLUDE_DIRS} ${PC_SODIUM_INCLUDE_DIRS}/*)
+    set(SODIUM_LIBRARY_HINTS ${PC_SODIUM_LIBRARY_DIRS} ${PC_SODIUM_LIBRARY_DIRS}/*)
+  else()
+    set(pkg_config_libs_private "${pkg_config_libs_private} -lsodium")
+  endif()
+endif(NOT MSVC)
 
 # some libraries install the headers is a subdirectory of the include dir
 # returned by pkg-config, so use a wildcard match to improve chances of finding
 # headers and libraries.
 find_path(
-    SODIUM_INCLUDE_DIRS
-    NAMES sodium.h
-    HINTS ${SODIUM_INCLUDE_HINTS}
+  SODIUM_INCLUDE_DIRS
+  NAMES sodium.h
+  HINTS ${SODIUM_INCLUDE_HINTS}
 )
 
 find_library(
-    SODIUM_LIBRARIES
-    NAMES libsodium sodium
-    HINTS ${SODIUM_LIBRARY_HINTS}
+  SODIUM_LIBRARIES
+  NAMES libsodium sodium
+  HINTS ${SODIUM_LIBRARY_HINTS}
 )
 
 include(FindPackageHandleStandardArgs)

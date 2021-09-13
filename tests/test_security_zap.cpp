@@ -309,6 +309,11 @@ test_zap_unsuccesful_no_handler_started (socket_config_fn server_socket_config_,
       my_endpoint, server, server_mon, ZMQ_EVENT_HANDSHAKE_FAILED_NO_DETAIL,
       EFAULT, client_socket_config_, client_socket_config_data_);
     shutdown_context_and_server_side (zap_thread, server, server_mon, handler);
+#else
+    LIBZMQ_UNUSED (server_socket_config_);
+    LIBZMQ_UNUSED (client_socket_config_);
+    LIBZMQ_UNUSED (client_socket_config_data_);
+    LIBZMQ_UNUSED (server_socket_config_data_);
 #endif
 }
 
